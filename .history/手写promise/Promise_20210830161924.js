@@ -50,12 +50,12 @@ const MyPromise = (({PENDING,REJECTED,RESOLVED,PromiseValue,PromiseStatu,ChangeS
                 }
                 try{
                     if(!task){
-                        // 处理promise串联,解决p.then().then(res => console.log(res))问题
+                        // 处理promise串联
                         link.call(this);
                         return;
                     }
                     const result = task(data);
-                    // 处理当result为Promise,后面的promise跟返回的promise状体一致
+                    // 处理当result为Promise
                     result instanceof MyPromise ? link.call(result) : resolve(result)
                 }catch(error){
                     reject(error.message);
